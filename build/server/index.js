@@ -133,11 +133,11 @@ const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: App
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-WfTPApbk.js", "imports": ["/assets/components-BEwn8Gzx.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-BqHdCKhp.js", "imports": ["/assets/components-BEwn8Gzx.js"], "css": [] } }, "url": "/assets/manifest-756ee452.js", "version": "756ee452" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-Cdxb-XzV.js", "imports": ["/assets/components-gM_XKWcc.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DRpvWws_.js", "imports": ["/assets/components-gM_XKWcc.js"], "css": [] } }, "url": "/assets/manifest-994191e8.js", "version": "994191e8" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
-const future = { "v3_fetcherPersist": false, "v3_relativeSplatPath": false, "v3_throwAbortReason": false, "unstable_singleFetch": false, "unstable_lazyRouteDiscovery": false };
+const future = { "v3_fetcherPersist": false, "v3_relativeSplatPath": false, "v3_throwAbortReason": false, "unstable_singleFetch": false, "unstable_lazyRouteDiscovery": false, "unstable_optimizeDeps": false };
 const isSpaMode = false;
 const publicPath = "/";
 const entry = { module: entryServer };
