@@ -1,7 +1,16 @@
-import { createRequestHandler } from "@remix-run/express";
-import express from "express";
+import Fastify, { FastifyInstance } from "fastify";
 
-import * as build from "./build/server/index.js";
+const fastify: FastifyInstance = Fastify({
+    logger: true,
+});
 
-const app = express();
-app.use(express.static("build/client"));
+fastify.get("/", async function handler(request, reply) {
+    return { hello: "world" };
+});
+
+try {
+    await fastify.listen({ port: 3000 });
+} catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+}
