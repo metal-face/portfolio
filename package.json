@@ -9,32 +9,37 @@
         "dev": "remix vite:dev",
         "start": "remix-serve ./build/index.js",
         "typecheck": "tsc",
-        "lint": "eslint --ignore-path .gitignore .",
+        "lint": "eslint .",
         "build": "remix vite:build"
     },
     "keywords": [],
-    "author": "",
+    "author": "Bryan Hughes",
     "license": "ISC",
     "dependencies": {
         "@fastify/swagger-ui": "^5.0.1",
-        "@remix-run/express": "^2.12.0",
         "@remix-run/node": "^2.12.0",
         "@remix-run/react": "^2.12.0",
+        "@remix-run/serve": "^2.12.0",
         "@types/node": "^22.5.5",
         "@vercel/remix": "^2.11.2",
         "cross-env": "^7.0.3",
         "fastify": "^4.28.1",
         "isbot": "4",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "ts-node": "^10.9.2"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@remix-run/dev": "^2.12.0",
-        "@types/express": "^4.17.21",
+        "@types/react": "^18.3.6",
+        "@types/react-dom": "^18.3.0",
         "eslint": "^9.10.0",
+        "eslint-config-prettier": "^9.1.0",
         "prettier": "3.3.3",
         "typescript": "^5.6.2",
         "vite": "^5.4.4"
+    },
+    "private": "true",
+    "engines": {
+        "node": ">=20.0.0"
     }
 }
