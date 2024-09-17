@@ -39,8 +39,10 @@ export function App() {
                 <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
                 <Links />
             </head>
-            <body>
-                <h1>Hello world!</h1>
+            <body className="h-screen w-screen">
+                <div className="h-full w-full flex items-center justify-center">
+                    <h1>Hello world!</h1>
+                </div>
                 <Outlet />
                 <Scripts />
             </body>
