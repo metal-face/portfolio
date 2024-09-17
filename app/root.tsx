@@ -6,16 +6,16 @@ import { Links, Meta, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 
+export const links: LinksFunction = () => [
+    { rel: "stylesheet", href: styles },
+    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+];
+
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
 
     return { theme: getTheme() };
 }
-
-export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: styles },
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
 
 export default function AppWithProviders() {
     const data = useLoaderData<typeof loader>();
@@ -32,7 +32,7 @@ export function App() {
     const [theme] = useTheme();
 
     return (
-        <html>
+        <html suppressHydrationWarning>
             <head>
                 <link rel="icon" href="data:image/x-icon;base64,AA" />
                 <Meta />
