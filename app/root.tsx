@@ -9,6 +9,7 @@ import { TooltipProvider } from "~/components/ui/tooltip";
 import { LiveReload } from "@remix-run/react";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import TitleCard from "~/components/title-card";
+import AboutMe from "~/components/about-me";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -58,6 +59,7 @@ export function App() {
             </head>
             <body className="h-screen w-screen">
                 <TitleCard />
+                <AboutMe />
                 <div className="absolute top-5 right-10">
                     <ModeToggle />
                 </div>
