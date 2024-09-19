@@ -4,12 +4,11 @@ import { themeSessionResolver } from "~/sessions.server";
 import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from "remix-themes";
 import { Links, Meta, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { ModeToggle } from "../components/mode-toggle";
-import { Button } from "~/components/ui/button";
-import { Github } from "lucide-react";
-import { Link } from "@remix-run/react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
+import { ModeToggle } from "./components/mode-toggle";
+import { TooltipProvider } from "~/components/ui/tooltip";
+import { LiveReload } from "@remix-run/react";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import TitleCard from "~/components/title-card";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -58,38 +57,12 @@ export function App() {
                 <Links />
             </head>
             <body className="h-screen w-screen">
-                <div className="h-full w-full flex items-center justify-center">
-                    <div>
-                        <h1 className="animate-fade my-name text-5xl sm:text-6xl md:text-8xl lg:text-9xl mb-2">
-                            Bryan Hughes
-                        </h1>
-                        <h2 className="description text-center text-md sm:text-lg md:text-xl lg:text-2xl ">
-                            Full Stack Software Developer
-                        </h2>
-                        <div className={""}>
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    <Link
-                                        target={"_blank"}
-                                        to={"https://github.com/metal-face"}
-                                        unstable_viewTransition
-                                    >
-                                        <Button>
-                                            <Github />
-                                        </Button>
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>GitHub</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </div>
-                    </div>
-                </div>
+                <TitleCard />
                 <div className="absolute top-5 right-10">
                     <ModeToggle />
                 </div>
                 <Outlet />
+                <LiveReload />
                 <Scripts />
             </body>
         </html>
