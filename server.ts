@@ -1,6 +1,6 @@
 import Fastify, { FastifyInstance } from "fastify";
+import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from "http";
 import type { AppLoadContext, ServerBuild } from "@remix-run/node";
-import { get, IncomingHttpHeaders, IncomingMessage, ServerResponse } from "http";
 
 import {
     createRequestHandler as createRemixRequestHandler,
@@ -35,7 +35,7 @@ export function createRequestHandler({
 
     return async (req, res) => {
         let request = createRemixRequest(req, res);
-        let loadContext = getLoadContext?.(request)
+        let loadContext = getLoadContext?.(request);
 
         let response = await handleRequest(request, loadContext);
 
@@ -89,18 +89,14 @@ async function sendRemixResponse(res: ServerResponse, nodeResponse: Response): P
     // @ts-expect-error
     let multiValueHeaders = nodeResponse.headers.raw();
 
-    res.writeHead(
-        nodeResponse.status,
-        nodeResponse.statusText,
-        multiValueHeaders
-    )
+    res.writeHead(nodeResponse.status, nodeResponse.statusText, multiValueHeaders);
 
     if (nodeResponse.body) {
         await writeReadableStreamToWritable(nodeResponse.body, res);
     } else {
         res.end();
     }
-};
+}
 
 fastify.get("/", async function handler(request, reply) {
     return { hello: "world" };
