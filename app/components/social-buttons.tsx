@@ -13,7 +13,7 @@ export default function SocialButtons() {
                         to={"https://github.com/metal-face"}
                         unstable_viewTransition
                     >
-                        <Button className={"dark:bg-white bg-black"}>
+                        <Button size={"lg"} className={"dark:bg-white bg-black"}>
                             <Github className={"dark:text-black"} />
                         </Button>
                     </Link>
@@ -25,7 +25,7 @@ export default function SocialButtons() {
             <Tooltip>
                 <TooltipTrigger>
                     <Link to={"/BRYAN_HUGHES_RESUME_2024.pdf"} target={"_blank"}>
-                        <Button className={"dark:bg-white bg-black"}>
+                        <Button size={"lg"} className={"dark:bg-white bg-black"}>
                             <File className={"dark:text-black"} />
                         </Button>
                     </Link>
@@ -37,7 +37,7 @@ export default function SocialButtons() {
             <Tooltip>
                 <TooltipTrigger>
                     <Link to={"https://blog-builder.com"} target={"_blank"}>
-                        <Button className={"dark:bg-white bg-black"}>
+                        <Button size={"lg"} className={"dark:bg-white bg-black"}>
                             <Pen className={"dark:text-black"} />
                         </Button>
                     </Link>
