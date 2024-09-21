@@ -13,19 +13,19 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "~/components/ui/carousel";
+import Prisma from "~/components/skills/prisma";
 
 export default function MySkills(): ReactElement {
     return (
         <div className={"h-screen w-screen"}>
             <div className={"h-full w-full flex items-center"}>
                 <Carousel
-                    className={"w-3/4 mx-auto shadow-inner p-8 rounded-lg"}
+                    className={
+                        "w-3/4 mx-auto shadow-inner rounded-lg dark:bg-neutral-800 bg-gray-100 p-1"
+                    }
                     opts={{ align: "start" }}
                 >
-                    <div className={"flex justify-center items-center "}>
-                        <span className={"about-me-title text-7xl"}>My Skills</span>
-                    </div>
-                    <CarouselContent className={"h-[500px] mx-2 "}>
+                    <CarouselContent className={"h-[500px] w-full mx-2"}>
                         <CarouselItem className="basis-1/3">
                             <TypeScript />
                         </CarouselItem>
@@ -41,7 +41,9 @@ export default function MySkills(): ReactElement {
                         <CarouselItem className="basis-1/3">
                             <Postgresql />
                         </CarouselItem>
-
+                        <CarouselItem className={"basis-1/3"}>
+                            <Prisma />
+                        </CarouselItem>
                         <CarouselItem className="basis-1/3">
                             <Git />
                         </CarouselItem>
