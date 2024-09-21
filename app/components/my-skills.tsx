@@ -17,9 +17,18 @@ import {
 export default function MySkills(): ReactElement {
     return (
         <div className={"h-screen w-screen"}>
-            <div className={"h-full w-full flex flex-wrap items-center justify-around"}>
-                <Carousel className={"w-3/4  mx-auto"}>
-                    <CarouselContent>
+            <div className={"h-full w-full flex items-center"}>
+                <Carousel
+                    className={"w-3/4 mx-auto shadow-inner p-8 rounded-lg"}
+                    opts={{ align: "start" }}
+                >
+                    <div className={"flex justify-center items-center "}>
+                        <span className={"about-me-title text-7xl"}>My Skills</span>
+                    </div>
+                    <CarouselContent className={"h-[500px] mx-2 "}>
+                        <CarouselItem className="basis-1/3">
+                            <TypeScript />
+                        </CarouselItem>
                         <CarouselItem className="basis-1/3">
                             <ReactCard />
                         </CarouselItem>
@@ -32,9 +41,7 @@ export default function MySkills(): ReactElement {
                         <CarouselItem className="basis-1/3">
                             <Postgresql />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
-                            <TypeScript />
-                        </CarouselItem>
+
                         <CarouselItem className="basis-1/3">
                             <Git />
                         </CarouselItem>
