@@ -14,11 +14,23 @@ export function ModeToggle() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button
+                    variant="link"
+                    className={
+                        "sticky bottom-[92%] left-[95%] bg-blue-950 dark:bg-purple-700 rounded-full h-14 w-14"
+                    }
+                >
                     {theme === "light" ? (
-                        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                        <Sun
+                            color={"yellow"}
+                            className="h-8 w-8 transition-all hover:rotate-[360deg] transform-gpu duration-500"
+                        />
                     ) : (
-                        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                        <Moon
+                            size={48}
+                            color={"white"}
+                            className="h-8 w-8 transition-all hover:rotate-45 duration-500 transform-gpu"
+                        />
                     )}
                 </Button>
             </DropdownMenuTrigger>
