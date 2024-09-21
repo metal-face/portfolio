@@ -62,9 +62,7 @@ export function App() {
                 <TitleCard />
                 <AboutMe />
                 <MySkills />
-                <div className="absolute top-5 right-10">
-                    <ModeToggle />
-                </div>
+                <ModeToggle />
                 <Outlet />
                 <LiveReload />
                 <Scripts />
