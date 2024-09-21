@@ -10,6 +10,7 @@ import { LiveReload } from "@remix-run/react";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import TitleCard from "~/components/title-card";
 import AboutMe from "~/components/about-me";
+import MySkills from "~/components/my-skills";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -60,6 +61,7 @@ export function App() {
             <body className="h-screen w-screen">
                 <TitleCard />
                 <AboutMe />
+                <MySkills />
                 <div className="absolute top-5 right-10">
                     <ModeToggle />
                 </div>
