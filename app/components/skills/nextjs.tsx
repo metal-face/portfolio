@@ -3,8 +3,12 @@ import { Card, CardContent } from "~/components/ui/card";
 export default function NextJs() {
     return (
         <div className={"h-full w-full flex items-center justify-center"}>
-            <Card className={"h-[300px] w-[300px] flex items-center justify-center shadow-2xl"}>
-                <CardContent className={"w-[250px] flex items-center"}>
+            <Card
+                className={
+                    "h-[300px] w-[300px] flex items-center justify-center shadow-2xl dark:bg-neutral-600 dark:border-neutral-600"
+                }
+            >
+                <CardContent className={"w-[250px] flex items-center p-0"}>
                     <svg
                         width="394"
                         height="80"
