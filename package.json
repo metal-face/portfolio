@@ -30,6 +30,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
         "cross-env": "^7.0.3",
+        "embla-carousel-react": "^8.3.0",
         "fastify": "^4.28.1",
         "isbot": "4",
         "lucide-react": "^0.441.0",
