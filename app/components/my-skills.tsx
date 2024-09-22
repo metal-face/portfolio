@@ -23,31 +23,31 @@ export default function MySkills(): ReactElement {
                     className={
                         "w-3/4 mx-auto shadow-inner rounded-lg dark:bg-neutral-800 bg-gray-100 p-1"
                     }
-                    opts={{ align: "start" }}
+                    opts={{ align: "center" }}
                 >
                     <CarouselContent className={"h-[500px] w-full mx-2"}>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" sm:basis-1/2 lg:basis-1/3">
                             <TypeScript />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <ReactCard />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <Tailwind />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <NextJs />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <Postgresql />
                         </CarouselItem>
-                        <CarouselItem className={"basis-1/3"}>
+                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
                             <Prisma />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <Git />
                         </CarouselItem>
-                        <CarouselItem className="basis-1/3">
+                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <GitHub />
                         </CarouselItem>
                     </CarouselContent>
