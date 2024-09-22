@@ -14,11 +14,15 @@ import {
     CarouselPrevious,
 } from "~/components/ui/carousel";
 import Prisma from "~/components/skills/prisma";
+import Vue from "~/components/skills/vue";
 
 export default function MySkills(): ReactElement {
     return (
         <div className={"h-screen w-screen"}>
-            <div className={"h-full w-full flex items-center"}>
+            <div className={"h-full w-full flex flex-col items-center justify-center"}>
+                <div className={"mb-4"}>
+                    <h1 className={"about-me-title text-6xl"}>My Skills</h1>
+                </div>
                 <Carousel
                     className={
                         "w-3/4 mx-auto shadow-inner rounded-lg dark:bg-neutral-800 bg-gray-100 p-1"
@@ -37,6 +41,9 @@ export default function MySkills(): ReactElement {
                         </CarouselItem>
                         <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <NextJs />
+                        </CarouselItem>
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                            <Vue />
                         </CarouselItem>
                         <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <Postgresql />
