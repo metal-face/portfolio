@@ -51,8 +51,8 @@ export default function MySkills(): ReactElement {
                             <GitHub />
                         </CarouselItem>
                     </CarouselContent>
-                    <CarouselNext />
-                    <CarouselPrevious />
+                    <CarouselNext className={"dark:bg-neutral-500"} />
+                    <CarouselPrevious className={"dark:bg-neutral-500"} />
                 </Carousel>
             </div>
         </div>
