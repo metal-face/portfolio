@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import { Calendar } from "~/components/ui/calendar";
 
 const now: number = Date.now();
+const tomorrow: number = Date.now() + 86400;
 
 const formSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters."),
@@ -34,20 +35,18 @@ const formSchema = z.object({
         .min(new Date(now + 86400), { message: "Must be in the future" }),
 });
 
-export default function qScheduleMe(): ReactElement {
+export default function ScheduleMe(): ReactElement {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
             email: "",
-            scheduleDate: new Date(now + 86400),
+            scheduleDate: new Date(tomorrow),
         },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
-
         const res = await fetch("/schedule", {
             method: "POST",
             headers: {
