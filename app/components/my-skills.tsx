@@ -34,43 +34,43 @@ export default function MySkills(): ReactElement {
                     opts={{ align: "center" }}
                 >
                     <CarouselContent className={"h-[500px] w-full mx-2"}>
-                        <CarouselItem className=" sm:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <TypeScript />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <ReactCard />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <Tailwind />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <NextJs />
                         </CarouselItem>
-                        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <Vue />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <Postgresql />
                         </CarouselItem>
-                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                        <CarouselItem className={"md:basis-1/2 lg:basis-1/3 xl:basis-1/4"}>
                             <Prisma />
                         </CarouselItem>
-                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                        <CarouselItem className={"md:basis-1/2 lg:basis-1/3 xl:basis-1/4"}>
                             <Bash />
                         </CarouselItem>
-                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                        <CarouselItem className={"md:basis-1/2 lg:basis-1/3 xl:basis-1/4"}>
                             <Python />
                         </CarouselItem>
-                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                        <CarouselItem className={"md:basis-1/2 lg:basis-1/3 xl:basis-1/4"}>
                             <Rust />
                         </CarouselItem>
-                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                        <CarouselItem className={"md:basis-1/2 lg:basis-1/3 xl:basis-1/4"}>
                             <Java />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <Git />
                         </CarouselItem>
-                        <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <GitHub />
                         </CarouselItem>
                     </CarouselContent>
