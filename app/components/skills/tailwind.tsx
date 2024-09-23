@@ -5,10 +5,10 @@ export default function Tailwind() {
         <div className={"h-full w-full flex items-center justify-center"}>
             <Card
                 className={
-                    "h-[300px] w-[300px] flex items-center justify-center shadow-2xl mb-4 sm:my-0 dark:bg-neutral-600 dark:border-neutral-600"
+                    "h-[200px] w-[200px] flex items-center justify-center shadow-2xl mb-4 sm:my-0 dark:bg-neutral-600 dark:border-neutral-600"
                 }
             >
-                <CardContent className={"w-[250px] flex items-center p-0"}>
+                <CardContent className={"w-[150px] flex items-center p-0"}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 54 33">
                         <g clip-path="url(#prefix__clip0)">
                             <path
