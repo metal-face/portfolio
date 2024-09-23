@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { Card, CardContent } from "~/components/ui/card";
 import { Theme, useTheme } from "remix-themes";
-import BashLogoDark from "../../../public/bash-dark.svg";
-import BashLogoLight from "../../../public/bash-light.svg";
+import BashLogoDark from "/bash-dark.svg";
+import BashLogoLight from "/bash-light.svg";
 
 export default function Bash(): ReactElement {
     const [theme] = useTheme();
