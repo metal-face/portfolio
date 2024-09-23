@@ -11,6 +11,7 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import TitleCard from "~/components/title-card";
 import AboutMe from "~/components/about-me";
 import MySkills from "~/components/my-skills";
+import ScheduleMe from "~/components/schedule-me";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -62,6 +63,7 @@ export function App() {
                 <TitleCard />
                 <AboutMe />
                 <MySkills />
+                <ScheduleMe />
                 <ModeToggle />
                 <Outlet />
                 <LiveReload />
