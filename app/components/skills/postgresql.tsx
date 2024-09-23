@@ -6,10 +6,10 @@ export default function Postgresql(): ReactElement {
         <div className={"h-full w-full flex justify-center items-center"}>
             <Card
                 className={
-                    "h-[300px] w-[300px] flex items-center justify-center shadow-2xl dark:bg-neutral-600 dark:border-neutral-600"
+                    "h-[200px] w-[200px] flex items-center justify-center shadow-2xl dark:bg-neutral-600 dark:border-neutral-600"
                 }
             >
-                <CardContent className={"w-[250px] flex items-center p-0"}>
+                <CardContent className={"w-[150px] flex items-center p-0"}>
                     <svg
                         width="432.071pt"
                         height="445.383pt"
