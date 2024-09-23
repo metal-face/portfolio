@@ -9,7 +9,6 @@ import {
     DropdownMenuCheckboxItem,
     DropdownMenuSeparator,
 } from "~/components/ui/dropdown-menu";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
 
 export function ModeToggle() {
     const [theme, setTheme] = useTheme();
@@ -20,39 +19,34 @@ export function ModeToggle() {
             }
         >
             <DropdownMenu>
-                <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>
-                        <DropdownMenuTrigger>
-                            <Button
-                                variant="link"
-                                className={
-                                    "bg-[#e3e3e3] dark:bg-[#383838] focus-visible:ring-0 rounded-full h-14 w-14 border-none"
-                                }
-                            >
-                                {theme === "light" ? (
-                                    <Sun className="h-8 w-8 transition-all hover:rotate-[360deg] transform-gpu duration-500" />
-                                ) : (
-                                    <Moon
-                                        size={48}
-                                        color={"white"}
-                                        className="h-8 w-8 transition-all hover:rotate-45 duration-500 transform-gpu"
-                                    />
-                                )}
-                            </Button>
-                            <TooltipContent className={"bg-neutral-600"}>
-                                <p className={"dark:text-neutral-300"}>Theme Toggle</p>
-                            </TooltipContent>
-                        </DropdownMenuTrigger>
-                    </TooltipTrigger>
-                </Tooltip>
+                <DropdownMenuTrigger>
+                    <Button
+                        variant="link"
+                        className={
+                            "bg-[#e3e3e3] dark:bg-[#383838] focus-visible:ring-0 rounded-full h-14 w-14 border-none"
+                        }
+                    >
+                        {theme === "light" ? (
+                            <Sun className="h-8 w-8 transition-all hover:rotate-[360deg] transform-gpu duration-500" />
+                        ) : (
+                            <Moon
+                                size={48}
+                                color={"white"}
+                                className="h-8 w-8 transition-all hover:rotate-45 duration-500 transform-gpu"
+                            />
+                        )}
+                    </Button>
+                </DropdownMenuTrigger>
                 <DropdownMenuContent
                     align="end"
-                    className={"dark:bg-neutral-700 dark:border-neutral-500"}
+                    className={"dark:bg-neutral-700 dark:border-neutral-600"}
                 >
-                    <DropdownMenuLabel>Theme Toggle</DropdownMenuLabel>
-                    <DropdownMenuSeparator className={"dark:bg-neutral-800"} />
+                    <DropdownMenuLabel className={"dark:text-neutral-300"}>
+                        Theme Toggle
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator className={"dark:bg-neutral-500"} />
                     <DropdownMenuCheckboxItem
-                        className={"dark:data-[highlighted]:bg-neutral-500"}
+                        className={"dark:data-[highlighted]:bg-neutral-500 dark:text-neutral-300"}
                         checked={theme === Theme.LIGHT}
                         onCheckedChange={() => setTheme(Theme.LIGHT)}
                     >
@@ -62,7 +56,7 @@ export function ModeToggle() {
                         </div>
                     </DropdownMenuCheckboxItem>
                     <DropdownMenuCheckboxItem
-                        className={"dark:data-[highlighted]:bg-neutral-500"}
+                        className={"dark:data-[highlighted]:bg-neutral-500 dark:text-neutral-300"}
                         checked={theme === Theme.DARK}
                         onCheckedChange={() => setTheme(Theme.DARK)}
                     >
