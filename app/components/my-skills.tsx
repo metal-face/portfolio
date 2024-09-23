@@ -17,6 +17,8 @@ import Prisma from "~/components/skills/prisma";
 import Vue from "~/components/skills/vue";
 import Bash from "~/components/skills/bash";
 import Python from "~/components/skills/python";
+import Java from "~/components/skills/java";
+import Rust from "~/components/skills/rust";
 
 export default function MySkills(): ReactElement {
     return (
@@ -58,6 +60,12 @@ export default function MySkills(): ReactElement {
                         </CarouselItem>
                         <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
                             <Python />
+                        </CarouselItem>
+                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                            <Rust />
+                        </CarouselItem>
+                        <CarouselItem className={" md:basis-1/2 lg:basis-1/3"}>
+                            <Java />
                         </CarouselItem>
                         <CarouselItem className=" md:basis-1/2 lg:basis-1/3">
                             <Git />
