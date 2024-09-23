@@ -45,7 +45,10 @@ export function ModeToggle() {
                         </DropdownMenuTrigger>
                     </TooltipTrigger>
                 </Tooltip>
-                <DropdownMenuContent align="end" className={"dark:bg-neutral-700"}>
+                <DropdownMenuContent
+                    align="end"
+                    className={"dark:bg-neutral-700 dark:border-neutral-500"}
+                >
                     <DropdownMenuLabel>Theme Toggle</DropdownMenuLabel>
                     <DropdownMenuSeparator className={"dark:bg-neutral-800"} />
                     <DropdownMenuCheckboxItem
