@@ -47,6 +47,7 @@ export default function ScheduleMe(): ReactElement {
             lastName: "",
             email: "",
             scheduleDate: new Date(tomorrow),
+            scheduleTime: new Date(new Date().setHours(9, 0, 0, 0)),
         },
     });
 
@@ -67,7 +68,10 @@ export default function ScheduleMe(): ReactElement {
     return (
         <div className={"h-screen w-screen"}>
             <div className={"h-full w-full flex items-center justify-center"}>
-                <div className={"shadow-2xl rounded-xl p-8"}>
+                <div className={"shadow-2xl rounded-xl p-8 dark:bg-neutral-800"}>
+                    <div className={"text-center"}>
+                        <h1 className={"about-me-title text-3xl mb-2"}>Schedule Me</h1>
+                    </div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-6"}>
                             <FormField
@@ -81,7 +85,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Bob"}
                                                 className={
-                                                    "dark:border-neutral-400 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
@@ -100,7 +104,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Lazar"}
                                                 className={
-                                                    "dark:border-neutral-400 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
@@ -119,7 +123,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"boblazar@losalamos.com"}
                                                 className={
-                                                    "dark:border-neutral-400 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
@@ -132,14 +136,14 @@ export default function ScheduleMe(): ReactElement {
                                 name={"scheduleDate"}
                                 render={({ field }) => (
                                     <FormItem className={"flex flex-col"}>
-                                        <FormLabel>Meeting Time</FormLabel>
+                                        <FormLabel>Meeting Date</FormLabel>
                                         <FormControl>
                                             <Popover>
                                                 <PopoverTrigger asChild>
                                                     <Button
                                                         variant={"outline"}
                                                         className={cn(
-                                                            "w-[280px] justify-start text-left font-normal dark:bg-[#1a1a1a] dark:border-neutral-400 dark:text-neutral-400",
+                                                            "w-[280px] justify-start text-left font-normal dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-400",
                                                             !field.value && "text-muted-foreground",
                                                         )}
                                                     >
@@ -173,7 +177,9 @@ export default function ScheduleMe(): ReactElement {
                                 name={"scheduleTime"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Book Time</FormLabel>
+                                        <div className={"w-full text-center"}>
+                                            <FormLabel>Meeting Time</FormLabel>
+                                        </div>
                                         <FormControl>
                                             <TimePicker
                                                 date={field.value}
@@ -187,7 +193,9 @@ export default function ScheduleMe(): ReactElement {
                                 )}
                             />
                             <div className={"flex justify-end"}>
-                                <Button type={"submit"}>Submit</Button>
+                                <Button className={"dark:bg-white dark:text-black"} type={"submit"}>
+                                    Submit
+                                </Button>
                             </div>
                         </form>
                     </Form>
