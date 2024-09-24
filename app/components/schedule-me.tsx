@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -18,6 +17,7 @@ import { cn } from "~/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "~/components/ui/calendar";
+import { TimePicker } from "~/components/ui/date-time-picker";
 
 const now: number = Date.now();
 const tomorrow: number = Date.now() + 86400;
@@ -33,6 +33,10 @@ const formSchema = z.object({
             invalid_type_error: "Not a valid date",
         })
         .min(new Date(now + 86400), { message: "Must be in the future" }),
+    scheduleTime: z
+        .date({ message: "Please input a time!" })
+        .min(new Date(new Date().setHours(8, 0, 0, 0)), { message: "Must be after 8:00am!" })
+        .max(new Date(new Date().setHours(20, 0, 0, 0)), { message: "Must be before 8:00pm!" }),
 });
 
 export default function ScheduleMe(): ReactElement {
@@ -159,6 +163,24 @@ export default function ScheduleMe(): ReactElement {
                                                     />
                                                 </PopoverContent>
                                             </Popover>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name={"scheduleTime"}
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Book Time</FormLabel>
+                                        <FormControl>
+                                            <TimePicker
+                                                date={field.value}
+                                                granularity={"minute"}
+                                                onChange={field.onChange}
+                                                hourCycle={12}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
