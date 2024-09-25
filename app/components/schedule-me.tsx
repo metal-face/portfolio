@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useLayoutEffect, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "~/components/ui/calendar";
 import { TimePicker } from "~/components/ui/date-time-picker";
+import { useToast } from "~/hooks/use-toast";
 
 const now: number = Date.now();
 const tomorrow: number = Date.now() + 86400;
@@ -39,19 +40,24 @@ const formSchema = z.object({
         .max(new Date(new Date().setHours(20, 0, 0, 0)), { message: "Must be before 8:00pm!" }),
 });
 
+export type ScheduleSchema = z.infer<typeof formSchema>;
+
 export default function ScheduleMe(): ReactElement {
+    const { toast } = useToast();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
             email: "",
-            scheduleDate: new Date(tomorrow),
+            scheduleDate: new Date(),
             scheduleTime: new Date(new Date().setHours(9, 0, 0, 0)),
         },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log("triggered");
         const res = await fetch("/schedule", {
             method: "POST",
             headers: {
@@ -61,14 +67,24 @@ export default function ScheduleMe(): ReactElement {
         });
 
         if (res.ok) {
-            console.log("success");
+            toast({
+                title: "Success 🎉",
+                description: "You have successfully booked an appointment with me!",
+                className: "bg-[#4bb543]",
+                duration: 2000,
+            });
+            form.reset();
         }
     }
 
     return (
         <div className={"h-screen w-screen"}>
             <div className={"h-full w-full flex items-center justify-center"}>
-                <div className={"shadow-2xl rounded-xl p-8 dark:bg-neutral-800"}>
+                <div
+                    className={
+                        "shadow-2xl rounded-xl p-8 dark:bg-neutral-800 w-11/12 sm:w-2/3 lg:w-2/5 md:w-3/5"
+                    }
+                >
                     <div className={"text-center"}>
                         <h1 className={"about-me-title text-3xl mb-2"}>Schedule Me</h1>
                     </div>
@@ -143,7 +159,7 @@ export default function ScheduleMe(): ReactElement {
                                                     <Button
                                                         variant={"outline"}
                                                         className={cn(
-                                                            "w-[280px] justify-start text-left font-normal dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-400",
+                                                            "w-full justify-start text-left font-normal dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-400",
                                                             !field.value && "text-muted-foreground",
                                                         )}
                                                     >
