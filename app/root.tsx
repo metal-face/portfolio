@@ -6,12 +6,12 @@ import { Links, Meta, Outlet, Scripts, useLoaderData } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { ModeToggle } from "./components/mode-toggle";
 import { TooltipProvider } from "~/components/ui/tooltip";
-import { LiveReload } from "@remix-run/react";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import TitleCard from "~/components/title-card";
 import AboutMe from "~/components/about-me";
 import MySkills from "~/components/my-skills";
 import ScheduleMe from "~/components/schedule-me";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { Toaster } from "~/components/ui/toaster";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -59,14 +59,16 @@ export function App() {
                 <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
                 <Links />
             </head>
-            <body className="h-screen w-screen">
-                <TitleCard />
-                <AboutMe />
-                <MySkills />
-                <ScheduleMe />
+            <body>
+                <main className="h-screen w-screen">
+                    <TitleCard />
+                    <AboutMe />
+                    <MySkills />
+                    <ScheduleMe />
+                </main>
+                <Toaster />
                 <ModeToggle />
                 <Outlet />
-                <LiveReload />
                 <Scripts />
             </body>
         </html>
