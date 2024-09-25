@@ -35,8 +35,8 @@ export default function NextJs() {
                             fill={theme === Theme.LIGHT ? "black" : "white"}
                         />
                         <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M80.907 79.339L17.0151 0H0V79.3059H13.6121V16.9516L63.8067 79.339H80.907Z"
                             fill={theme === Theme.LIGHT ? "black" : "white"}
                         />
