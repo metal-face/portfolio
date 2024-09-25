@@ -7,7 +7,7 @@ export default function SocialButtons() {
     return (
         <div className={"flex justify-center space-x-2 mt-2"}>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <Link
                         target={"_blank"}
                         to={"https://github.com/metal-face"}
@@ -23,7 +23,7 @@ export default function SocialButtons() {
                 </TooltipContent>
             </Tooltip>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <Link to={"/BRYAN_HUGHES_RESUME_2024.pdf"} target={"_blank"}>
                         <Button size={"lg"} className={"dark:bg-white bg-black"}>
                             <File className={"dark:text-black"} />
@@ -35,7 +35,7 @@ export default function SocialButtons() {
                 </TooltipContent>
             </Tooltip>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <Link to={"https://blog-builder.com"} target={"_blank"}>
                         <Button size={"lg"} className={"dark:bg-white bg-black"}>
                             <Pen className={"dark:text-black"} />
