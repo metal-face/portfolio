@@ -19,7 +19,7 @@ export function ModeToggle() {
             }
         >
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
                     <Button
                         variant="link"
                         className={
