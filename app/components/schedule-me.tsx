@@ -16,6 +16,7 @@ import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import { fromZonedTime } from "date-fns-tz";
 import { Calendar } from "~/components/ui/calendar";
 import { TimePicker } from "~/components/ui/date-time-picker";
 import { useToast } from "~/hooks/use-toast";
@@ -23,7 +24,7 @@ import { useToast } from "~/hooks/use-toast";
 const now: number = Date.now();
 const tomorrow: number = Date.now() + 86400;
 
-const formSchema = z.object({
+export const formSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters."),
     lastName: z.string().min(2, "Last name must be at least 2 characters."),
     email: z.string().email("Invalid email address."),
@@ -57,13 +58,26 @@ export default function ScheduleMe(): ReactElement {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log("triggered");
+        const utcTime = fromZonedTime(
+            values.scheduleTime,
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+        );
+        const formattedUtcTime = format(utcTime, "yyyy-MM-dd'T'HH:mm:ssXXX");
+
+        const transformed = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            scheduleDate: values.scheduleDate,
+            scheduleTime: formattedUtcTime,
+        };
+
         const res = await fetch("/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(values),
+            body: JSON.stringify(transformed),
         });
 
         if (res.ok) {
