@@ -1,47 +1,81 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "../../prisma";
-import type { ScheduleSchema } from "~/components/schedule-me";
-import { formSchema } from "~/components/schedule-me";
-import { toZonedTime } from "date-fns-tz";
-import { format } from "date-fns";
+import { formatISO, parseISO } from "date-fns";
+import { z } from "zod";
+
+interface Request {
+    firstName: string;
+    lastName: string;
+    email: string;
+    scheduleDate: string;
+    scheduleTime: string;
+}
+
+const serverSideSchema = z.object({
+    firstName: z.string().min(2).max(30),
+    lastName: z.string().min(2).max(30),
+    email: z.string().email(),
+    scheduleDate: z.string(),
+    scheduleTime: z.string(),
+});
 
 export const action = async ({ request }: ActionFunctionArgs) => {
     switch (request.method) {
         case "POST": {
-            const data: ScheduleSchema = await request.json();
+            const data: Request = (await request.json()) as Request;
 
-            console.log(data);
+            if (
+                !data ||
+                !data.firstName ||
+                !data.lastName ||
+                !data.email ||
+                !data.scheduleDate ||
+                !data.scheduleTime
+            ) {
+                return json({ success: false, ok: false }, 400);
+            }
 
-            const localTime = toZonedTime(
-                data.scheduleTime,
-                Intl.DateTimeFormat().resolvedOptions().timeZone,
-            );
+            const validRequest = await serverSideSchema.safeParseAsync(data);
 
-            console.log(localTime);
+            if (!validRequest.success) {
+                return json({ success: false, ok: false }, 400);
+            }
 
-            const formattedTime = format(localTime, "yyyy-MM-dd HH:mm:ss");
+            const alreadyBooked = await prisma.scheduleRequest.findFirst({
+                where: {
+                    email: data.email,
+                },
+            });
+
+            if (alreadyBooked) {
+                return json({ success: false, ok: false }, 409);
+            }
+
+            const parsedISODate = parseISO(data.scheduleDate);
+            const formattedDate = formatISO(parsedISODate, { representation: "complete" });
+
+            const parsedISOTime = parseISO(data.scheduleTime);
+            const formattedTime = formatISO(parsedISOTime, { representation: "complete" });
 
             const transformed = {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
-                scheduleDate: new Date(data.scheduleDate),
-                scheduleTime: new Date(data.scheduleTime),
+                scheduleDate: formattedDate,
+                scheduleTime: formattedTime,
             };
 
             try {
-                const isValid = await formSchema.safeParseAsync(transformed);
+                const res = await prisma.scheduleRequest.create({
+                    data: transformed,
+                });
 
-                // const res = await prisma.scheduleRequest.create({
-                //     data: data,
-                // });
-
-                if (isValid) {
-                    return json({ success: true }, 200);
+                if (res) {
+                    return json({ success: true, ok: true }, 200);
                 }
             } catch (error: any) {
                 console.error(error);
-                return json({ success: false }, 500);
+                return json({ success: false, ok: false }, 500);
             }
         }
     }
