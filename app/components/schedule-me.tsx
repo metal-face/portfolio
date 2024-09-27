@@ -72,7 +72,7 @@ export default function ScheduleMe(): ReactElement {
             scheduleTime: formattedUtcTime,
         };
 
-        const res = await fetch("/schedule", {
+        const res: Response = await fetch("/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -80,15 +80,36 @@ export default function ScheduleMe(): ReactElement {
             body: JSON.stringify(transformed),
         });
 
-        if (res.ok) {
+        console.log(res);
+
+        if (res.status === 400) {
             toast({
-                title: "Success 🎉",
-                description: "You have successfully booked an appointment with me!",
-                className: "bg-[#4bb543]",
-                duration: 2000,
+                title: "Oops! 😬",
+                description: "Something went wrong!",
+                variant: "destructive",
             });
-            form.reset();
+            return;
         }
+
+        if (res.status === 409) {
+            toast({
+                title: "Oops! 😬",
+                description: "Looks like you already booked a meeting with me!",
+                variant: "destructive",
+            });
+
+            form.reset();
+
+            return;
+        }
+
+        toast({
+            title: "Success 🎉",
+            description: "You have successfully booked an appointment with me!",
+            className: "bg-[#4bb543]",
+            duration: 2000,
+        });
+        form.reset();
     }
 
     return (
