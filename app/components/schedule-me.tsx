@@ -130,9 +130,10 @@ export default function ScheduleMe(): ReactElement {
                                 name={"firstName"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>First Name</FormLabel>
+                                        <FormLabel htmlFor={"firstName"}>First Name</FormLabel>
                                         <FormControl>
                                             <Input
+                                                id={"firstName"}
                                                 {...field}
                                                 placeholder={"Bob"}
                                                 className={
@@ -149,9 +150,10 @@ export default function ScheduleMe(): ReactElement {
                                 name={"lastName"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Last Name</FormLabel>
+                                        <FormLabel htmlFor={"lastName"}>Last Name</FormLabel>
                                         <FormControl>
                                             <Input
+                                                id={"lastName"}
                                                 {...field}
                                                 placeholder={"Lazar"}
                                                 className={
@@ -168,9 +170,11 @@ export default function ScheduleMe(): ReactElement {
                                 name={"email"}
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel htmlFor={"email"}>Email</FormLabel>
                                         <FormControl>
                                             <Input
+                                                id={"email"}
+                                                autoComplete={"false"}
                                                 {...field}
                                                 placeholder={"boblazar@losalamos.com"}
                                                 className={
@@ -187,11 +191,12 @@ export default function ScheduleMe(): ReactElement {
                                 name={"scheduleDate"}
                                 render={({ field }) => (
                                     <FormItem className={"flex flex-col"}>
-                                        <FormLabel>Meeting Date</FormLabel>
-                                        <FormControl>
+                                        <FormLabel htmlFor={"scheduleDate"}>Meeting Date</FormLabel>
+                                        <FormControl id={"scheduleDate"}>
                                             <Popover>
                                                 <PopoverTrigger asChild>
                                                     <Button
+                                                        id={"scheduleDate"}
                                                         variant={"outline"}
                                                         className={cn(
                                                             "w-full justify-start text-left font-normal dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-400",
@@ -229,7 +234,9 @@ export default function ScheduleMe(): ReactElement {
                                 render={({ field }) => (
                                     <FormItem>
                                         <div className={"w-full text-center"}>
-                                            <FormLabel>Meeting Time</FormLabel>
+                                            <FormLabel htmlFor={"datetime-picker-hour-input"}>
+                                                Meeting Time
+                                            </FormLabel>
                                         </div>
                                         <FormControl>
                                             <TimePicker
