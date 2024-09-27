@@ -2,6 +2,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "../../prisma";
 import { formatISO, parseISO } from "date-fns";
 import { z } from "zod";
+import { sendConfirmationMail } from "../../mail";
 
 interface Request {
     firstName: string;
@@ -19,45 +20,30 @@ const serverSideSchema = z.object({
     scheduleTime: z.string(),
 });
 
+const SUCCESS = 200;
+const BAD_REQUEST = 400;
+const CONFLICT = 409;
+const SERVER_ERROR = 500;
+
 export const action = async ({ request }: ActionFunctionArgs) => {
     switch (request.method) {
         case "POST": {
             const data: Request = (await request.json()) as Request;
 
-            if (
-                !data ||
-                !data.firstName ||
-                !data.lastName ||
-                !data.email ||
-                !data.scheduleDate ||
-                !data.scheduleTime
-            ) {
-                return json({ success: false, ok: false }, 400);
-            }
-
             const validRequest = await serverSideSchema.safeParseAsync(data);
 
             if (!validRequest.success) {
-                return json({ success: false, ok: false }, 400);
+                return json({ success: false, errors: validRequest.error.errors }, BAD_REQUEST);
             }
 
-            const alreadyBooked = await prisma.scheduleRequest.findFirst({
-                where: {
-                    email: data.email,
-                },
+            const formattedDate: string = formatISO(parseISO(data.scheduleDate), {
+                representation: "complete",
+            });
+            const formattedTime: string = formatISO(parseISO(data.scheduleTime), {
+                representation: "complete",
             });
 
-            if (alreadyBooked) {
-                return json({ success: false, ok: false }, 409);
-            }
-
-            const parsedISODate = parseISO(data.scheduleDate);
-            const formattedDate = formatISO(parsedISODate, { representation: "complete" });
-
-            const parsedISOTime = parseISO(data.scheduleTime);
-            const formattedTime = formatISO(parsedISOTime, { representation: "complete" });
-
-            const transformed = {
+            const formattedData = {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
@@ -67,15 +53,28 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
             try {
                 const res = await prisma.scheduleRequest.create({
-                    data: transformed,
+                    data: formattedData,
                 });
 
                 if (res) {
-                    return json({ success: true, ok: true }, 200);
+                    const emailSent: boolean = await sendConfirmationMail(
+                        formattedData.email,
+                        formattedData.firstName,
+                        data.scheduleDate,
+                        data.scheduleTime,
+                    );
+
+                    if (!emailSent) {
+                        console.error("Email send failed");
+                        return json({ success: false }, BAD_REQUEST);
+                    }
+                    return json({ success: true }, SUCCESS);
                 }
             } catch (error: any) {
-                console.error(error);
-                return json({ success: false, ok: false }, 500);
+                if (error.code === "P2002") {
+                    return json({ success: false }, CONFLICT);
+                }
+                return json({ success: false }, SERVER_ERROR);
             }
         }
     }
