@@ -1,6 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { format } from "date-fns";
-import { template } from "./template";
+import { template } from "~/mail/template";
 
 export const transporter: Transporter = nodemailer.createTransport({
     host: "bryanhughes.net",
