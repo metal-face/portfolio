@@ -2,7 +2,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "../../prisma";
 import { formatISO, parseISO } from "date-fns";
 import { z } from "zod";
-import { sendConfirmationMail } from "~/mail";
+import { emailQueue } from "~/queue/emailQueue";
 
 interface Request {
     firstName: string;
@@ -57,17 +57,16 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 });
 
                 if (res) {
-                    const emailSent: boolean = await sendConfirmationMail(
-                        formattedData.email,
-                        formattedData.firstName,
-                        data.scheduleDate,
-                        data.scheduleTime,
+                    await emailQueue.add(
+                        "sendConfirmationMail",
+                        {
+                            to: formattedData.email,
+                            firstName: formattedData.firstName,
+                            scheduleDate: formattedData.scheduleDate,
+                            scheduleTime: formattedData.scheduleTime,
+                        },
+                        { attempts: 3, backoff: { type: "exponential", delay: 1000 } },
                     );
-
-                    if (!emailSent) {
-                        console.error("Email send failed");
-                        return json({ success: false }, BAD_REQUEST);
-                    }
                     return json({ success: true }, SUCCESS);
                 }
             } catch (error: any) {
