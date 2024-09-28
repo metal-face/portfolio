@@ -13,11 +13,7 @@ import {
 export function ModeToggle() {
     const [theme, setTheme] = useTheme();
     return (
-        <div
-            className={
-                "h-fit w-fit sticky bottom-[92%] left-[85%] sm:left-[90%] md:left-[92%] lg:left-[94%] focus-visible:ring-0"
-            }
-        >
+        <div className={"h-fit w-fit fixed top-5 right-8 focus-visible:ring-0"}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
