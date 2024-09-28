@@ -4,8 +4,9 @@ import { template } from "~/mail/template";
 
 export const transporter: Transporter = nodemailer.createTransport({
     host: "bryanhughes.net",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
+    logger: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
@@ -21,7 +22,7 @@ export async function sendConfirmationMail(
     const formattedDate = format(date, "PPPP");
     const formattedTime = format(time, "pp");
     try {
-        let info = await transporter.sendMail({
+        const info = await transporter.sendMail({
             from: '"Bryan Hughes" <noreply@bryanhughes.net>',
             to: email,
             subject: "Meeting Confirmation",
