@@ -2,7 +2,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "../../prisma";
 import { formatISO, parseISO } from "date-fns";
 import { z } from "zod";
-import { sendConfirmationMail } from "../../mail";
+import { sendConfirmationMail } from "~/mail";
 
 interface Request {
     firstName: string;
