@@ -19,32 +19,35 @@ export default function AboutMe(): ReactElement {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button
+                                size={"icon"}
                                 onClick={() => setOpen(true)}
-                                className={"h-8 w-8 md:w-12 md:h-12 rounded-full"}
+                                className={
+                                    "h-8 w-8 md:w-12 md:h-12 rounded-full bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400"
+                                }
                             >
-                                <Image className={"h-8 w-8"} />
+                                <Image className={"h-4 w-4 text-black dark:text-white"} />
                             </Button>
                         </TooltipTrigger>
-                        <TooltipContent>
+                        <TooltipContent className={"bg-neutral-300 dark:bg-neutral-600"}>
                             <span>My picture 🙂</span>
                         </TooltipContent>
                     </Tooltip>
                 </div>
                 <div
                     className={
-                        "p-7  h-full overflow-y-scroll bg-neutral-100 rounded-2xl shadow-inner sm:w-2/3 space-y-3 m-4"
+                        "p-7 h-full overflow-y-scroll bg-neutral-100 dark:bg-neutral-800 rounded-2xl shadow-inner sm:w-2/3 space-y-3 m-4"
                     }
                 >
-                    <p className={"about-me text-sm sm:text-lg"}>
+                    <p className={"about-me text-md sm:text-lg"}>
                         My name is Bryan Hughes. I was born and raised in Toronto, Canada. I am 32
                         years old and have been working as a Software Developer for 5 years.
                     </p>
-                    <p className={"about-me text-sm sm:text-lg"}>
+                    <p className={"about-me text-md sm:text-lg"}>
                         I am self taught, and constantly continuing my education by building
                         personal projects, contributing to open source, and diving into new
                         technologies. I am very passionate about our industry and the work we do.
                     </p>
-                    <p className={"about-me text-sm sm:text-lg"}>
+                    <p className={"about-me text-md sm:text-lg"}>
                         I specialize in writing both <strong>clients and servers</strong>. My
                         strongest language is <strong>JavaScript</strong> and{" "}
                         <strong>TypeScript</strong>, but I am proficient in using other general
@@ -59,7 +62,7 @@ export default function AboutMe(): ReactElement {
                         application. Lastly, I have an advanced understanding of database languages
                         such as <strong>MySQL, Postgresql, SQLite, MongoDB, and GraphQL</strong> .
                     </p>
-                    <p className={"about-me text-sm sm:text-lg"}>
+                    <p className={"about-me text-md sm:text-lg"}>
                         Before becoming a software developer, I was a carpenter doing renovations
                         all over Ontario, Canada. I even ran my own small renovation company. This
                         taught me how to not only work independently under pressure, but also the
