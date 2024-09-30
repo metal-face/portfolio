@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { Image } from "lucide-react";
+import { Camera } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
 import ResponsiveDialog from "~/components/responsive-dialog";
 
@@ -9,23 +9,24 @@ export default function AboutMe(): ReactElement {
     return (
         <div className={"h-screen w-screen"}>
             <ResponsiveDialog open={open} setOpen={setOpen}>
-                <img src={"/Me.jpeg"} alt={"A picture of me"} />
+                <div className={"h-[50%] w-[75%] mx-auto"}>
+                    <img src={"/Me.jpeg"} alt={"A picture of me"} />
+                </div>
             </ResponsiveDialog>
-            <div className={"w-full h-3/4 flex flex-col items-center justify-center"}>
-                <div className={"flex items-center space-x-4"}>
-                    <span className={"about-me-title text-4xl sm:text-6xl md:text-7xl "}>
+            <div className={"w-full h-4/5 flex flex-col items-center "}>
+                <div className={"mb-4"}>
+                    <span className={"about-me-title text-4xl sm:text-6xl md:text-7xl"}>
                         About Me
                     </span>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button
                                 size={"icon"}
+                                variant={"link"}
                                 onClick={() => setOpen(true)}
-                                className={
-                                    "h-8 w-8 md:w-12 md:h-12 rounded-full bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400"
-                                }
+                                className={"md:w-12 md:h-12 bg-bg-transparent ml-4"}
                             >
-                                <Image className={"h-4 w-4 text-black dark:text-white"} />
+                                <Camera className={"h-8 w-8 text-black dark:text-white"} />
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent className={"bg-neutral-300 dark:bg-neutral-600"}>
@@ -35,19 +36,19 @@ export default function AboutMe(): ReactElement {
                 </div>
                 <div
                     className={
-                        "p-7 h-full overflow-y-scroll bg-neutral-100 dark:bg-neutral-800 rounded-2xl shadow-inner sm:w-2/3 space-y-3 m-4"
+                        "about-container p-7 h-full overflow-y-scroll sm:w-9/12 md:w-7/8 lg:w-3/5 bg-neutral-100 dark:bg-neutral-800 sm:rounded-2xl shadow-inner space-y-3"
                     }
                 >
-                    <p className={"about-me text-md sm:text-lg"}>
+                    <p className={"about-me text-sm sm:text-md md:text-lg"}>
                         My name is Bryan Hughes. I was born and raised in Toronto, Canada. I am 32
                         years old and have been working as a Software Developer for 5 years.
                     </p>
-                    <p className={"about-me text-md sm:text-lg"}>
+                    <p className={"about-me text-sm sm:text-md md:text-lg"}>
                         I am self taught, and constantly continuing my education by building
                         personal projects, contributing to open source, and diving into new
                         technologies. I am very passionate about our industry and the work we do.
                     </p>
-                    <p className={"about-me text-md sm:text-lg"}>
+                    <p className={"about-me text-sm sm:text-md md:text-lg"}>
                         I specialize in writing both <strong>clients and servers</strong>. My
                         strongest language is <strong>JavaScript</strong> and{" "}
                         <strong>TypeScript</strong>, but I am proficient in using other general
@@ -62,7 +63,7 @@ export default function AboutMe(): ReactElement {
                         application. Lastly, I have an advanced understanding of database languages
                         such as <strong>MySQL, Postgresql, SQLite, MongoDB, and GraphQL</strong> .
                     </p>
-                    <p className={"about-me text-md sm:text-lg"}>
+                    <p className={"about-me text-sm sm:text-md md:text-lg"}>
                         Before becoming a software developer, I was a carpenter doing renovations
                         all over Ontario, Canada. I even ran my own small renovation company. This
                         taught me how to not only work independently under pressure, but also the
