@@ -45,18 +45,21 @@ export default function ResponsiveDialog({ open, setOpen, children }: Props): Re
     }
 
     return (
-        <Drawer open={open} onOpenChange={setOpen}>
+        <Drawer open={open} onOpenChange={setOpen} fadeFromIndex={1} snapPoints={[1]}>
             <DrawerContent>
                 <DrawerHeader className="text-left">
-                    <DrawerTitle>Edit profile</DrawerTitle>
+                    <DrawerTitle>Me in Washington, DC</DrawerTitle>
                     <DrawerDescription>
-                        Make changes to your profile here. Click save when you're done.
+                        This is a picture of me that my buddy took, in front of the Abraham Lincoln
+                        memorial in Washington, DC.{" "}
                     </DrawerDescription>
                 </DrawerHeader>
                 <div>{children}</div>
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>
-                        <Button variant="outline">Close</Button>
+                        <Button className={"dark:text-black"} variant="outline">
+                            Close
+                        </Button>
                     </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
