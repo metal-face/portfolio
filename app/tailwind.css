@@ -11,6 +11,11 @@
   }
 }
 
+*::-webkit-scrollbar {
+  background: transparent;
+  width: 0px
+}
+
 .my-name {
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
