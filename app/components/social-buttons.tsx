@@ -26,7 +26,7 @@ export default function SocialButtons() {
                                     <div className={"w-1/4"}>
                                         <Github className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4"}>GitHub</div>
+                                    <div className={"w-3/4 dark:text-black"}>GitHub</div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
@@ -46,7 +46,7 @@ export default function SocialButtons() {
                                     <div className={"w-1/4"}>
                                         <ScrollText className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4"}>My Resume</div>
+                                    <div className={"w-3/4 dark:text-black"}>My Resume</div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
@@ -66,7 +66,7 @@ export default function SocialButtons() {
                                     <div className={"w-1/4"}>
                                         <Hammer className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4"}>Blog Builder</div>
+                                    <div className={"w-3/4 dark:text-black"}>Blog Builder</div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
