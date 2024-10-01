@@ -10,7 +10,8 @@
         "start": "remix-serve ./build/server/index.js",
         "typecheck": "tsc",
         "lint": "eslint .",
-        "build": "prisma generate && remix vite:build"
+        "build": "remix vite:build",
+        "postinstall": "prisma generate"
     },
     "keywords": [],
     "author": "Bryan Hughes",
