@@ -4,8 +4,8 @@ import { template } from "~/mail/template";
 
 export const transporter: Transporter = nodemailer.createTransport({
     host: "bryanhughes.net",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     logger: true,
     auth: {
         user: process.env.EMAIL_USER,
