@@ -12,6 +12,7 @@ import MySkills from "~/components/my-skills";
 import ScheduleMe from "~/components/schedule-me";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Toaster } from "~/components/ui/toaster";
+import { SpeedInsights } from "@vercel/speed-insights/remix";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const { getTheme } = await themeSessionResolver(request);
@@ -73,6 +74,7 @@ export function App() {
                 <ModeToggle />
                 <Outlet />
                 <Scripts />
+                <SpeedInsights />
             </body>
         </html>
     );
