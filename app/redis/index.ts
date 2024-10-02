@@ -30,3 +30,7 @@ redisConnection.on("connect", () => {
 redisConnection.on("ready", () => {
     console.log("REDIS CONNECTION READY");
 });
+
+redisConnection.on("error", (err) => {
+    console.error("❌ REDIS ERROR: ", err.message);
+});
