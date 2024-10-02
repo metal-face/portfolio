@@ -18,3 +18,15 @@ export const redisConnection: IORedis = new IORedis({
     password: REDIS_PASSWORD,
     maxRetriesPerRequest: null,
 });
+
+redisConnection.on("connecting", () => {
+    console.log("REDIS CONNECTING ⌛️");
+});
+
+redisConnection.on("connect", () => {
+    console.log("REDIS CONNECTED ✅");
+});
+
+redisConnection.on("ready", () => {
+    console.log("REDIS CONNECTION READY");
+});
