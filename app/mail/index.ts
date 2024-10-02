@@ -3,15 +3,24 @@ import { format } from "date-fns";
 import { template } from "~/mail/template";
 
 export const transporter: Transporter = nodemailer.createTransport({
+    pool: true,
     host: "bryanhughes.net",
-    port: 587,
-    secure: false,
+    port: 465,
+    secure: true,
     logger: true,
     debug: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
     },
+});
+
+transporter.verify((error, success) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log(success, "Server is ready to send emails");
+    }
 });
 
 export async function sendConfirmationMail(
