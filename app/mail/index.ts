@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { template } from "~/mail/template";
 
 export const transporter: Transporter = nodemailer.createTransport({
-    pool: true,
     host: "bryanhughes.net",
     port: 465,
     secure: true,
@@ -12,6 +11,10 @@ export const transporter: Transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false,
     },
 });
 
