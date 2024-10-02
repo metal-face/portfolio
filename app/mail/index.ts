@@ -1,9 +1,11 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { format } from "date-fns";
 import { template } from "~/mail/template";
+import XOAuth2 from "nodemailer/lib/xoauth2";
 
 export const transporter: Transporter = nodemailer.createTransport({
     host: "bryanhughes.net",
+    priority: "high",
     port: 465,
     secure: true,
     logger: true,
@@ -16,6 +18,18 @@ export const transporter: Transporter = nodemailer.createTransport({
         // do not fail on invalid certs
         rejectUnauthorized: false,
     },
+});
+
+transporter.on("error", (err: Error) => {
+    console.log("❌ NODE MAILER ERROR: ", err);
+});
+
+transporter.on("token", (token: XOAuth2.Token) => {
+    console.log(`Node Mailer Token: ${token}`);
+});
+
+transporter.on("idle", () => {
+    console.log("Node Mailer IDLE");
 });
 
 transporter.verify((error, success) => {
