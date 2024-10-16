@@ -8,7 +8,7 @@ export default function SocialButtons() {
         <div className={"mt-5 w-full flex items-center justify-center mx-auto"}>
             <div
                 className={
-                    "space-y-2 md:space-y-0 md:space-x-2  flex flex-col md:flex-row items-center justify-center"
+                    "space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row items-center justify-center"
                 }
             >
                 <div className={"w-full"}>
@@ -21,12 +21,16 @@ export default function SocialButtons() {
                             >
                                 <Button
                                     size={"lg"}
-                                    className={"dark:bg-white bg-black w-[200px] description"}
+                                    className={
+                                        "dark:bg-white bg-black w-[200px] description hover:bg-black"
+                                    }
                                 >
                                     <div className={"w-1/4"}>
                                         <Github className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4 dark:text-black"}>GitHub</div>
+                                    <div className={"w-3/4 dark:text-black font-medium"}>
+                                        GitHub
+                                    </div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
@@ -41,12 +45,16 @@ export default function SocialButtons() {
                             <Link to={"/BRYAN_HUGHES_RESUME_2024.pdf"} target={"_blank"}>
                                 <Button
                                     size={"lg"}
-                                    className={"dark:bg-white bg-black w-[200px] description"}
+                                    className={
+                                        "dark:bg-white bg-black w-[200px] description hover:bg-black"
+                                    }
                                 >
                                     <div className={"w-1/4"}>
                                         <ScrollText className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4 dark:text-black"}>My Resume</div>
+                                    <div className={"w-3/4 dark:text-black font-medium"}>
+                                        My Resume
+                                    </div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
@@ -61,12 +69,16 @@ export default function SocialButtons() {
                             <Link to={"https://blog-builder.com"} target={"_blank"}>
                                 <Button
                                     size={"lg"}
-                                    className={"dark:bg-white bg-black w-[200px] description"}
+                                    className={
+                                        "dark:bg-white bg-black w-[200px] description hover:bg-black"
+                                    }
                                 >
                                     <div className={"w-1/4"}>
                                         <Hammer className={"dark:text-black mr-4"} />
                                     </div>
-                                    <div className={"w-3/4 dark:text-black"}>Blog Builder</div>
+                                    <div className={"w-3/4 dark:text-black font-medium"}>
+                                        Blog Builder
+                                    </div>
                                 </Button>
                             </Link>
                         </TooltipTrigger>
