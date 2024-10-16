@@ -140,7 +140,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Bob"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
@@ -160,7 +160,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Lazar"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
@@ -181,7 +181,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"boblazar@losalamos.com"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
                                                 }
                                             />
                                         </FormControl>
