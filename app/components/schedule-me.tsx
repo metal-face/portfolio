@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useLayoutEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -20,9 +20,9 @@ import { fromZonedTime } from "date-fns-tz";
 import { Calendar } from "~/components/ui/calendar";
 import { TimePicker } from "~/components/ui/date-time-picker";
 import { useToast } from "~/hooks/use-toast";
+import { Loader } from "lucide-react";
 
 const now: number = Date.now();
-const tomorrow: number = Date.now() + 86400;
 
 export const formSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters."),
@@ -45,6 +45,7 @@ export type ScheduleSchema = z.infer<typeof formSchema>;
 
 export default function ScheduleMe(): ReactElement {
     const { toast } = useToast();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -58,6 +59,7 @@ export default function ScheduleMe(): ReactElement {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
         const utcTime = fromZonedTime(
             values.scheduleTime,
             Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -80,14 +82,13 @@ export default function ScheduleMe(): ReactElement {
             body: JSON.stringify(transformed),
         });
 
-        console.log(res);
-
         if (res.status === 400) {
             toast({
                 title: "Oops! 😬",
                 description: "Something went wrong!",
                 variant: "destructive",
             });
+            setLoading(false);
             return;
         }
 
@@ -99,6 +100,7 @@ export default function ScheduleMe(): ReactElement {
             });
 
             form.reset();
+            setLoading(false);
 
             return;
         }
@@ -110,6 +112,7 @@ export default function ScheduleMe(): ReactElement {
             duration: 2000,
         });
         form.reset();
+        setLoading(false);
     }
 
     return (
@@ -253,6 +256,9 @@ export default function ScheduleMe(): ReactElement {
                             <div className={"flex justify-end"}>
                                 <Button className={"dark:bg-white dark:text-black"} type={"submit"}>
                                     Submit
+                                    {loading ? (
+                                        <Loader className={"h-4 w-4 animate-spin ml-4"} />
+                                    ) : null}
                                 </Button>
                             </div>
                         </form>
