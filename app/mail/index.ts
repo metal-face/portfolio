@@ -1,6 +1,7 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { format } from "date-fns";
 import { template } from "~/mail/template";
+import { myTemplate } from "~/mail/my-template";
 import XOAuth2 from "nodemailer/lib/xoauth2";
 
 export const transporter: Transporter = nodemailer.createTransport({
@@ -49,14 +50,21 @@ export async function sendConfirmationMail(
     const formattedDate = format(date, "PPPP");
     const formattedTime = format(time, "pp");
     try {
-        const info = await transporter.sendMail({
+        const confirmation = await transporter.sendMail({
             from: '"Bryan Hughes" <noreply@bryanhughes.net>',
             to: email,
             subject: "Meeting Confirmation",
             html: template(firstName, formattedDate, formattedTime),
         });
 
-        if (info.accepted) {
+        const myConfirmation = await transporter.sendMail({
+            from: '"Bryan Hughes" <noreply@bryanhughes.net>',
+            to: "mail@bryanhughes.net",
+            subject: "New Meeting Booked!",
+            html: myTemplate("Bryan Hughes", firstName, email, date, time),
+        });
+
+        if (confirmation.accepted && myConfirmation.accepted) {
             return true;
         }
     } catch (error) {
