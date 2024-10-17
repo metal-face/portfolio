@@ -2,8 +2,10 @@ import { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "~/components/ui/dialog";
@@ -30,15 +32,22 @@ export default function ResponsiveDialog({ open, setOpen, children }: Props): Re
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>Me in Washington, DC</DialogTitle>
+                <DialogContent className="sm:max-w-[425px] dark:text-black">
+                    <DialogHeader className={"dark:text-black"}>
+                        <DialogTitle className={"dark:text-black"}>
+                            Me in Washington, DC
+                        </DialogTitle>
                         <DialogDescription>
                             This is a picture of me that my buddy took, in front of the Abraham
                             Lincoln memorial in Washington, DC.
                         </DialogDescription>
                     </DialogHeader>
                     <div>{children}</div>
+                    <DialogFooter className={"w-full  flex justify-center items-center"}>
+                        <DialogClose asChild>
+                            <Button className={"w-full"}>Close</Button>
+                        </DialogClose>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         );
