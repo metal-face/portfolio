@@ -6,23 +6,15 @@ export interface MeetingProps {
     firstName: string;
     lastName: string;
     email: string;
-    meetingDate: Date;
-    meetingTime: Date;
-}
-
-function generatePassword(): crypto.UUID {
-    return crypto.randomUUID();
+    meetingDate: string;
 }
 
 export function scheduleMeeting({
     firstName,
     lastName,
     email,
-    meetingTime,
     meetingDate,
 }: MeetingProps): Promise<AxiosResponse> {
-    const dateTimeString = `${meetingDate}T${meetingTime}:00`;
-    const combinedDate = new Date(dateTimeString);
     return Axios({
         method: "POST",
         url: "https://api.zoom.us/v2/users/me/meetings",
@@ -35,7 +27,7 @@ export function scheduleMeeting({
             agenda: `A meeting with Bryan Hughes and ${firstName} ${lastName}`,
             topic: "Introductions",
             duration: 60,
-            password: generatePassword(),
+            password: "test123",
             pre_schedule: true,
             schedule_for: email,
             settings: {
@@ -44,7 +36,7 @@ export function scheduleMeeting({
             enforce_login: false,
             host_video: true,
             type: 2,
-            start_time: combinedDate,
+            start_time: meetingDate,
         },
     });
 }
