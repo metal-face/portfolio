@@ -21,7 +21,8 @@ import { Calendar } from "~/components/ui/calendar";
 import { TimePicker } from "~/components/ui/date-time-picker";
 import { useToast } from "~/hooks/use-toast";
 import { Loader } from "lucide-react";
-
+import useZoomMutation from "~/requests/use-zoom-mutation";
+import { AxiosResponse } from "axios";
 const now: number = Date.now();
 
 export const formSchema = z.object({
@@ -46,6 +47,7 @@ export type ScheduleSchema = z.infer<typeof formSchema>;
 export default function ScheduleMe(): ReactElement {
     const { toast } = useToast();
     const [loading, setLoading] = useState<boolean>(false);
+    const zoomMutation = useZoomMutation();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -73,6 +75,19 @@ export default function ScheduleMe(): ReactElement {
             scheduleDate: values.scheduleDate,
             scheduleTime: formattedUtcTime,
         };
+
+        // const localizedDate = format(values.scheduleDate, "yyyy-MM-dd");
+        // const localizedTime = format(values.scheduleTime, "hh:mm:ssXXXXX");
+        // const combinedDate = `${localizedDate}T${localizedTime}`;
+        //
+        // console.log(process.env.ZOOM_SECRET_TOKEN);
+        //
+        // const res: AxiosResponse = await zoomMutation.mutateAsync({
+        //     firstName: values.firstName,
+        //     lastName: values.lastName,
+        //     email: values.email,
+        //     meetingDate: combinedDate,
+        // });
 
         const res: Response = await fetch("/schedule", {
             method: "POST",
