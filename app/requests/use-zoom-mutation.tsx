@@ -7,15 +7,14 @@ export default function useZoomMutation() {
     const { toast } = useToast();
 
     return useMutation({
-        mutationKey: ["schedule-meeting"],
+        mutationKey: ["scheduleMeeting"],
         mutationFn: async ({
             firstName,
             lastName,
             email,
-            meetingTime,
             meetingDate,
         }: MeetingProps): Promise<AxiosResponse> =>
-            scheduleMeeting({ firstName, lastName, email, meetingTime, meetingDate }),
+            scheduleMeeting({ firstName, lastName, email, meetingDate }),
         onSuccess: async () => {
             toast({
                 title: "Success 🎉",
