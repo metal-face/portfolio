@@ -52,9 +52,9 @@ export default function AboutMe(): ReactElement {
                         I specialize in writing both <strong>clients and servers</strong>. My
                         strongest language is <strong>JavaScript</strong> and{" "}
                         <strong>TypeScript</strong>, but I am proficient in using other general
-                        purpose programming languages, such as
+                        purpose programming languages, such as{" "}
                         <strong>Java, Rust, Go, and Python</strong>. I have an advanced
-                        understanding of both <strong>Object Oriented Programming</strong> and{" "}
+                        understanding of both{" "} <strong>Object Oriented Programming</strong> and{" "}
                         <strong>Functional programming</strong>. I also have an advanced
                         understanding of{" "}
                         <strong>Async I/O using Single Threaded Event Loops</strong> and{" "}
