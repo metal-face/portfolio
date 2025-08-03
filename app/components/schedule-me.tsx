@@ -19,10 +19,10 @@ import { format } from "date-fns";
 import { fromZonedTime } from "date-fns-tz";
 import { Calendar } from "~/components/ui/calendar";
 import { TimePicker } from "~/components/ui/date-time-picker";
-import { useToast } from "~/hooks/use-toast";
 import { Loader } from "lucide-react";
-import useZoomMutation from "~/requests/use-zoom-mutation";
-import { AxiosResponse } from "axios";
+import { toast } from "sonner";
+import useCreateAppointment from "~/requests/create-appointment";
+
 const now: number = Date.now();
 
 export const formSchema = z.object({
@@ -45,9 +45,7 @@ export const formSchema = z.object({
 export type ScheduleSchema = z.infer<typeof formSchema>;
 
 export default function ScheduleMe(): ReactElement {
-    const { toast } = useToast();
-    const [loading, setLoading] = useState<boolean>(false);
-    const zoomMutation = useZoomMutation();
+    const { mutateAsync, isPending } = useCreateAppointment();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -61,73 +59,38 @@ export default function ScheduleMe(): ReactElement {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setLoading(true);
         const utcTime = fromZonedTime(
             values.scheduleTime,
             Intl.DateTimeFormat().resolvedOptions().timeZone,
         );
         const formattedUtcTime = format(utcTime, "yyyy-MM-dd'T'HH:mm:ssXXX");
 
-        const transformed = {
+        const res = await mutateAsync({
             firstName: values.firstName,
             lastName: values.lastName,
             email: values.email,
             scheduleDate: values.scheduleDate,
-            scheduleTime: formattedUtcTime,
-        };
-
-        // const localizedDate = format(values.scheduleDate, "yyyy-MM-dd");
-        // const localizedTime = format(values.scheduleTime, "hh:mm:ssXXXXX");
-        // const combinedDate = `${localizedDate}T${localizedTime}`;
-        //
-        // console.log(process.env.ZOOM_SECRET_TOKEN);
-        //
-        // const res: AxiosResponse = await zoomMutation.mutateAsync({
-        //     firstName: values.firstName,
-        //     lastName: values.lastName,
-        //     email: values.email,
-        //     meetingDate: combinedDate,
-        // });
-
-        const res: Response = await fetch("/schedule", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(transformed),
+            scheduleTime: formattedUtcTime
         });
 
         if (res.status === 400) {
-            toast({
-                title: "Oops! 😬",
-                description: "Something went wrong!",
-                variant: "destructive",
-            });
-            setLoading(false);
+            toast.error("Oops! 😬", { description: "Something went wrong!" });
             return;
         }
 
         if (res.status === 409) {
-            toast({
-                title: "Oops! 😬",
-                description: "Looks like you already booked a meeting with me!",
-                variant: "destructive",
+            toast.error("Oop! 😬", {
+                description: "Looks like you've already booked a meeting with me.",
             });
 
             form.reset();
-            setLoading(false);
-
             return;
         }
 
-        toast({
-            title: "Success 🎉",
-            description: "You have successfully booked an appointment with me!",
-            className: "bg-[#4bb543]",
-            duration: 2000,
+        toast.success("Success 🎉", {
+            description: "You have successfully booked a meeting with me.",
         });
         form.reset();
-        setLoading(false);
     }
 
     return (
@@ -155,7 +118,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Bob"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-stone-100 placeholder:dark:text-stone-400"
                                                 }
                                             />
                                         </FormControl>
@@ -175,7 +138,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"Lazar"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-stone-100 placeholder:dark:text-stone-400"
                                                 }
                                             />
                                         </FormControl>
@@ -196,7 +159,7 @@ export default function ScheduleMe(): ReactElement {
                                                 {...field}
                                                 placeholder={"boblazar@losalamos.com"}
                                                 className={
-                                                    "dark:border-neutral-600 dark:text-neutral-400 placeholder:dark:text-neutral-400"
+                                                    "dark:border-neutral-600 dark:text-stone-100 placeholder:dark:text-stone-400"
                                                 }
                                             />
                                         </FormControl>
@@ -269,9 +232,9 @@ export default function ScheduleMe(): ReactElement {
                                 )}
                             />
                             <div className={"flex justify-end"}>
-                                <Button className={"dark:bg-white dark:text-black"} type={"submit"}>
+                                <Button className={"dark:bg-white dark:text-black"} type={"submit"} disabled={isPending}>
                                     Submit
-                                    {loading ? (
+                                    {isPending ? (
                                         <Loader className={"h-4 w-4 animate-spin ml-4"} />
                                     ) : null}
                                 </Button>
