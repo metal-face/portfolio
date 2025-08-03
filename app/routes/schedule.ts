@@ -68,8 +68,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 }
             } catch (error: any) {
                 if (error.code === "P2002") {
+                    console.error(error);
                     return json({ success: false }, CONFLICT);
                 }
+                console.error(error);
                 return json({ success: false }, SERVER_ERROR);
             }
         }
