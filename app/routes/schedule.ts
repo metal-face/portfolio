@@ -2,7 +2,6 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "../../prisma";
 import { formatISO, parseISO } from "date-fns";
 import { z } from "zod";
-import { emailQueue } from "~/queue/emailQueue";
 import { sendConfirmationMail } from "~/mail";
 
 interface Request {
@@ -58,17 +57,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 });
 
                 if (res) {
-                    // await emailQueue.add(
-                    //     "sendConfirmationMail",
-                    //     {
-                    //         to: formattedData.email,
-                    //         firstName: formattedData.firstName,
-                    //         scheduleDate: formattedData.scheduleDate,
-                    //         scheduleTime: formattedData.scheduleTime,
-                    //     },
-                    //     { attempts: 3, backoff: { type: "exponential", delay: 1000 } },
-                    // );
-
                     await sendConfirmationMail(
                         formattedData.email,
                         formattedData.firstName,
