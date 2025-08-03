@@ -11,7 +11,7 @@ import AboutMe from "~/components/about-me";
 import MySkills from "~/components/my-skills";
 import ScheduleMe from "~/components/schedule-me";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Toaster } from "~/components/ui/toaster";
+import { Toaster } from "sonner";
 import { SpeedInsights } from "@vercel/speed-insights/remix";
 import { Analytics } from "@vercel/analytics/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -107,7 +107,7 @@ export function App() {
                         <MySkills />
                         <ScheduleMe />
                     </main>
-                    <Toaster />
+                    <Toaster richColors/>
                     <ModeToggle />
                     <Outlet />
                     <Scripts />
